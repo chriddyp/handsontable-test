@@ -1,0 +1,37 @@
+<html>
+    <script type="text/javascript"
+    src="https://cdn.rawgit.com/handsontable/handsontable/master/dist/handsontable.full.min.js"></script>
+    <div id="HOT"></div>
+
+<script type="text/javascript">
+
+window.onload = function(){
+console.profile("page JS");
+console.profile("initialize array");
+var nRows = 500*1000;
+var rows = new Array(nRows);
+for(var i=0; i<nRows; i++) {
+    rows[i] = [i, Math.random()];
+}
+console.profileEnd("initialize array");
+
+console.profile("Render Handsontable");
+new Handsontable(document.getElementById("HOT"), {
+    data: rows,
+    minSpareRows: 1,
+    minRows: 50,
+    minSpareCols: 1,
+    minCols: 25,
+    contextMenu: true,
+    formulas: true,
+    fillHandle: true,
+
+    afterRender: function() {
+        console.profileEnd("Render Handsontable");
+    }
+});
+console.profileEnd("page JS");
+}
+</script>
+
+</html>
